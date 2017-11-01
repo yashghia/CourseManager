@@ -1,0 +1,196 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.yash.hw6.CreateCourseFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="29dp"
+            android:layout_marginTop="22dp"
+            android:text="Title" />
+
+        <EditText
+            android:id="@+id/editText"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="42dp"
+            android:layout_marginTop="10dp"
+            android:layout_toEndOf="@+id/textView3"
+            android:ems="10"
+            android:hint="Title"
+            android:inputType="textPersonName" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_alignStart="@+id/textView3"
+            android:layout_below="@+id/editText"
+            android:layout_marginTop="20dp" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/recyclerView"
+            android:layout_below="@+id/editText"
+            android:text="Choose Instructor" />
+
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/recyclerView"
+            android:layout_below="@+id/recyclerView"
+            android:layout_marginTop="11dp"
+            android:text="Schedule" />
+
+        <TextView
+            android:id="@+id/textView6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/textView5"
+            android:layout_marginTop="13dp"
+            android:layout_toEndOf="@+id/textView3"
+            android:text="Day" />
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/hours"
+            android:layout_alignBottom="@+id/hours"
+            android:layout_alignEnd="@+id/textView5"
+            android:text="Time" />
+
+        <Spinner
+            android:id="@+id/dayspinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/editText"
+            android:layout_alignTop="@+id/textView6" />
+
+        <EditText
+            android:id="@+id/hours"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/textView8"
+            android:layout_alignBottom="@+id/textView8"
+            android:layout_alignStart="@+id/dayspinner"
+            android:ems="10"
+            android:hint="H"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/minutes"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/dayspinner"
+            android:layout_marginTop="14dp"
+            android:layout_toEndOf="@+id/dayspinner"
+            android:ems="10"
+            android:hint="M"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/minutes"
+            android:layout_alignBottom="@+id/minutes"
+            android:layout_toEndOf="@+id/textView4"
+            android:text=":" />
+
+        <Spinner
+            android:id="@+id/timespinner"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textView8"
+            android:layout_marginStart="15dp"
+            android:layout_toEndOf="@+id/minutes" />
+
+        <TextView
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView5"
+            android:layout_below="@+id/hours"
+            android:layout_marginTop="16dp"
+            android:text="Credit Hours" />
+
+        <RadioGroup
+            android:layout_width="200dp"
+            android:layout_height="20dp"
+            android:orientation="horizontal"
+            android:layout_alignBottom="@+id/textView9"
+            android:layout_toEndOf="@+id/hours"
+            android:id="@+id/radioGroup">
+
+            <RadioButton
+                android:id="@+id/radioButton3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="1" />
+
+            <RadioButton
+                android:id="@+id/radioButton4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="2" />
+
+            <RadioButton
+                android:id="@+id/radioButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="3" />
+        </RadioGroup>
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView9"
+            android:layout_below="@+id/textView9"
+            android:layout_marginTop="20dp"
+            android:text="Semester" />
+
+        <Spinner
+            android:id="@+id/semesterspinner"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textView10"
+            android:layout_toEndOf="@+id/textView9" />
+
+        <Button
+            android:id="@+id/reset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="32dp"
+            android:layout_toStartOf="@+id/radioGroup"
+            android:text="Reset" />
+
+        <Button
+            android:id="@+id/create"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/reset"
+            android:layout_toEndOf="@+id/timespinner"
+            android:text="Create" />
+    </RelativeLayout>
+
+</FrameLayout>
