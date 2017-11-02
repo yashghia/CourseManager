@@ -2,10 +2,16 @@ package com.example.yash.hw6;
 
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,20 +20,35 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
-
 import io.realm.Realm;
 import io.realm.RealmResults;
+
+import static android.app.Activity.RESULT_CANCELED;
+import static android.app.Activity.RESULT_OK;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
 public class RegisterFragment extends Fragment {
+    private static final String IMAGE_DIRECTORY_NAME = "camera";
     Realm realm;
+    private Uri fileUri;
+    private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
+    public static final int MEDIA_TYPE_IMAGE = 1;
+    ImageView image;
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        image = (ImageView) getView().findViewById(R.id.imageView);
+        image.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(intent, CAMERA_CAPTURE_IMAGE_REQUEST_CODE);
+            }
+        });
         getView().findViewById(R.id.register).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -44,7 +65,7 @@ public class RegisterFragment extends Fragment {
                                 newUser.setLastName(((EditText) getView().findViewById(R.id.lname)).getText().toString());
                                 newUser.setUserName(((EditText) getView().findViewById(R.id.uname)).getText().toString());
                                 newUser.setPassword(((EditText) getView().findViewById(R.id.pword)).getText().toString());
-                                ImageView image = (ImageView) getView().findViewById(R.id.imageView);
+
                                 Bitmap bitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
                                 if (image != null) {
                                     ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -86,4 +107,28 @@ public class RegisterFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_register, container, false);
     }
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // if the result is capturing Image
+        if (requestCode == CAMERA_CAPTURE_IMAGE_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                if (data.getExtras() != null) {
+                    Bitmap pic = (Bitmap) data.getExtras().get("data");
+                    image.setImageBitmap(pic);
+                } else {
+                    image.setImageResource(R.mipmap.ic_launcher);
+                }
+            } else if (resultCode == RESULT_CANCELED) {
+                // user cancelled Image capture
+                Toast.makeText(getActivity(),
+                        "User cancelled image capture", Toast.LENGTH_SHORT)
+                        .show();
+            } else {
+                // failed to capture image
+                Toast.makeText(getActivity(),
+                        "Sorry! Failed to capture image", Toast.LENGTH_SHORT)
+                        .show();
+            }
+        }
+    }
 }
