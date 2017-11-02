@@ -4,4 +4,10 @@
         android:title="Home" />
     <item android:id="@+id/instructors"
         android:title="Instructors" />
+    <item android:id="@+id/addInstructors"
+        android:title="Add Instructors" />
+    <item android:id="@+id/logout"
+        android:title="Logout" />
+    <item android:id="@+id/exit"
+        android:title="Exit" />
 </menu>

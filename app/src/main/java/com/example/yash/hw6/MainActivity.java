@@ -6,12 +6,19 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Realm.init(this);
+        RealmConfiguration config = new RealmConfiguration.Builder().name("myrealm.realm").build();
+        Realm.setDefaultConfiguration(config);
+        getFragmentManager().beginTransaction().add(R.id.container,new LoginFragment(),"login").commit();
     }
 
     @Override
@@ -28,6 +35,12 @@ public class MainActivity extends AppCompatActivity {
             case R.id.home:
                 return true;
             case R.id.instructors:
+                return true;
+            case R.id.addInstructors:
+                return true;
+            case R.id.logout:
+                return true;
+            case R.id.exit:
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
