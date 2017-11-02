@@ -21,6 +21,7 @@ import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import io.realm.Realm;
+import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
 
 import static android.app.Activity.RESULT_CANCELED;
@@ -31,11 +32,8 @@ import static android.app.Activity.RESULT_OK;
  * A simple {@link Fragment} subclass.
  */
 public class RegisterFragment extends Fragment {
-    private static final String IMAGE_DIRECTORY_NAME = "camera";
     Realm realm;
-    private Uri fileUri;
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
-    public static final int MEDIA_TYPE_IMAGE = 1;
     ImageView image;
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -54,6 +52,8 @@ public class RegisterFragment extends Fragment {
             public void onClick(View v) {
                 try {
                     realm = Realm.getDefaultInstance();
+                    RealmConfiguration config = new RealmConfiguration.Builder().name("login.realm").build();
+                    Realm.setDefaultConfiguration(config);
                     final RealmResults<User> users = realm.where(User.class).equalTo("userName", ((EditText) getView().findViewById(R.id.uname)).getText().toString()).findAll();
                     if (users.size() == 0) {
                         realm.executeTransaction(new Realm.Transaction() {

@@ -16,8 +16,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Realm.init(this);
-        RealmConfiguration config = new RealmConfiguration.Builder().name("myrealm.realm").build();
-        Realm.setDefaultConfiguration(config);
         getFragmentManager().beginTransaction().add(R.id.container,new LoginFragment(),"login").commit();
     }
 
