@@ -52,8 +52,8 @@ public class RegisterFragment extends Fragment {
             public void onClick(View v) {
                 try {
                     realm = Realm.getDefaultInstance();
-                    RealmConfiguration config = new RealmConfiguration.Builder().name("login.realm").build();
-                    Realm.setDefaultConfiguration(config);
+                    //RealmConfiguration config = new RealmConfiguration.Builder().name("login.realm").build();
+                    //Realm.setDefaultConfiguration(config);
                     final RealmResults<User> users = realm.where(User.class).equalTo("userName", ((EditText) getView().findViewById(R.id.uname)).getText().toString()).findAll();
                     if (users.size() == 0) {
                         realm.executeTransaction(new Realm.Transaction() {

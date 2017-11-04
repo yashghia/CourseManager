@@ -76,8 +76,8 @@ public class AddInstructorFragment extends Fragment {
             public void onClick(View v) {
                 try {
                     realm = Realm.getDefaultInstance();
-                    RealmConfiguration config = new RealmConfiguration.Builder().name("instructor.realm").build();
-                    Realm.setDefaultConfiguration(config);
+                    //RealmConfiguration config = new RealmConfiguration.Builder().name("instructor.realm").build();
+                    //Realm.setDefaultConfiguration(config);
                     //final RealmResults<Instructor> Instructor = realm.where(Instructor.class).equalTo("fname", ((EditText) getView().findViewById(R.id.ifname)).getText().toString()).findAll();
                     //if (Instructor.size() == 0) {
                         realm.executeTransaction(new Realm.Transaction() {

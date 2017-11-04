@@ -130,29 +130,29 @@
             android:text="Credit Hours" />
 
         <RadioGroup
+            android:id="@+id/radioGroup"
             android:layout_width="200dp"
             android:layout_height="20dp"
-            android:orientation="horizontal"
             android:layout_alignBottom="@+id/textView9"
             android:layout_toEndOf="@+id/hours"
-            android:id="@+id/radioGroup">
+            android:orientation="horizontal">
 
             <RadioButton
-                android:id="@+id/radioButton3"
+                android:id="@+id/one"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="1" />
 
             <RadioButton
-                android:id="@+id/radioButton4"
+                android:id="@+id/two"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="2" />
 
             <RadioButton
-                android:id="@+id/radioButton"
+                android:id="@+id/three"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -170,7 +170,7 @@
 
         <Spinner
             android:id="@+id/semesterspinner"
-            android:layout_width="250dp"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/textView10"
             android:layout_toEndOf="@+id/textView9" />
@@ -188,9 +188,20 @@
             android:id="@+id/create"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/reset"
             android:layout_alignBottom="@+id/reset"
-            android:layout_toEndOf="@+id/timespinner"
+            android:layout_alignEnd="@+id/semesterspinner"
             android:text="Create" />
+
+        <TextView
+            android:id="@+id/noInstructor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignTop="@+id/recyclerView"
+            android:layout_marginTop="42dp"
+            android:text="You haven’t added any instructor yet, please add at least one instructor to continue."
+            android:visibility="invisible"/>
     </RelativeLayout>
 
 </FrameLayout>

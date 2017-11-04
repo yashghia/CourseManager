@@ -53,4 +53,17 @@ public class CourseFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_course, container, false);
     }
 
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        getView().findViewById(R.id.add).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getFragmentManager().beginTransaction()
+                        .replace(R.id.container,new CreateCourseFragment(),"createcourse")
+                        .commit();
+            }
+        });
+    }
+
 }

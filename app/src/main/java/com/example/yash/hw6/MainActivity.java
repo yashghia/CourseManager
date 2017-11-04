@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Realm.init(this);
-        getFragmentManager().beginTransaction().add(R.id.container,new LoginFragment(),"login").commit();
+        getFragmentManager().beginTransaction().add(R.id.container,new LoginFragment(),"default").commit();
     }
 
     @Override
@@ -31,16 +31,16 @@ public class MainActivity extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.home:
-                getFragmentManager().beginTransaction().add(R.id.container,new LoginFragment(),"login").commit();
+                getFragmentManager().beginTransaction().replace(R.id.container,new CourseFragment(),"course").commit();
                 return true;
             case R.id.instructors:
-                getFragmentManager().beginTransaction().add(R.id.container,new CourseFragment(),"coursedata").commit();
+                //getFragmentManager().beginTransaction().replace(R.id.container,new (),"course").commit();
                 return true;
             case R.id.addInstructors:
-                getFragmentManager().beginTransaction().add(R.id.container,new CreateCourseFragment(),"createcourse").commit();
+                getFragmentManager().beginTransaction().replace(R.id.container,new AddInstructorFragment(),"addinst").commit();
                 return true;
             case R.id.logout:
-                getFragmentManager().beginTransaction().add(R.id.container,new LoginFragment(),"login").commit();
+                getFragmentManager().beginTransaction().replace(R.id.container,new LoginFragment(),"login").commit();
                 return true;
             case R.id.exit:
                 return true;
