@@ -20,7 +20,7 @@
             android:text="Title" />
 
         <EditText
-            android:id="@+id/editText"
+            android:id="@+id/titleTextView"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:layout_alignStart="@+id/textView3"
-            android:layout_below="@+id/editText"
+            android:layout_below="@+id/titleTextView"
             android:layout_marginTop="20dp" />
 
         <TextView
@@ -44,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/recyclerView"
-            android:layout_below="@+id/editText"
+            android:layout_below="@+id/titleTextView"
             android:text="Choose Instructor" />
 
         <TextView
@@ -78,7 +78,7 @@
             android:id="@+id/dayspinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/editText"
+            android:layout_alignStart="@+id/titleTextView"
             android:layout_alignTop="@+id/textView6" />
 
         <EditText

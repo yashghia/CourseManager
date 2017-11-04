@@ -31,12 +31,16 @@ public class MainActivity extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.home:
+                getFragmentManager().beginTransaction().add(R.id.container,new LoginFragment(),"login").commit();
                 return true;
             case R.id.instructors:
+                getFragmentManager().beginTransaction().add(R.id.container,new CourseFragment(),"coursedata").commit();
                 return true;
             case R.id.addInstructors:
+                getFragmentManager().beginTransaction().add(R.id.container,new CreateCourseFragment(),"createcourse").commit();
                 return true;
             case R.id.logout:
+                getFragmentManager().beginTransaction().add(R.id.container,new LoginFragment(),"login").commit();
                 return true;
             case R.id.exit:
                 return true;

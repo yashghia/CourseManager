@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 import io.realm.Realm;
 
@@ -62,10 +64,12 @@ public class LoginFragment extends Fragment {
                                 final User user = realm.where(User.class).equalTo("userName", username).findFirst();
                                 if (user != null && user.getPassword().equals(password)) {
                                     Log.d("user", "fname " + user.getFirstName() + " lname " + user.getLastName() + " uname " + user.getUserName() + " password " + user.getPassword());
+                                    ArrayList<Instructor> instructors =  new ArrayList(Realm.where(Instructor.class).findAll());
                                     getFragmentManager().beginTransaction()
-                                            .replace(R.id.container, new CourseFragment(), "courses")
+                                            .replace(R.id.container, new CourseFragment(instructors), "courses")
                                             .commit();
                                     Toast.makeText(getActivity(), "Login Successful, Welcome " + user.getFirstName(), Toast.LENGTH_LONG).show();
+
                                 } else {
                                     Toast.makeText(getActivity(), "Invalid Credentials, Please try again", Toast.LENGTH_SHORT).show();
                                 }
