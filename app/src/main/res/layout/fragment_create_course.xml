@@ -20,7 +20,7 @@
             android:text="Title" />
 
         <EditText
-            android:id="@+id/titleTextView"
+            android:id="@+id/editText"
             android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
@@ -36,7 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:layout_alignStart="@+id/textView3"
-            android:layout_below="@+id/titleTextView"
+            android:layout_below="@+id/editText"
             android:layout_marginTop="20dp" />
 
         <TextView
@@ -44,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/recyclerView"
-            android:layout_below="@+id/titleTextView"
+            android:layout_below="@+id/editText"
             android:text="Choose Instructor" />
 
         <TextView
@@ -78,7 +78,7 @@
             android:id="@+id/dayspinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/titleTextView"
+            android:layout_alignStart="@+id/editText"
             android:layout_alignTop="@+id/textView6" />
 
         <EditText
@@ -97,8 +97,9 @@
             android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/dayspinner"
-            android:layout_marginTop="14dp"
-            android:layout_toEndOf="@+id/dayspinner"
+            android:layout_marginTop="19dp"
+            android:layout_toEndOf="@+id/textView8"
+            android:layout_marginLeft="10dp"
             android:ems="10"
             android:hint="M"
             android:inputType="textPersonName" />
@@ -109,16 +110,16 @@
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/minutes"
             android:layout_alignBottom="@+id/minutes"
-            android:layout_toEndOf="@+id/textView4"
+            android:layout_marginLeft="5dp"
+            android:layout_toEndOf="@+id/hours"
             android:text=":" />
 
         <Spinner
             android:id="@+id/timespinner"
-            android:layout_width="30dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/textView8"
-            android:layout_marginStart="15dp"
-            android:layout_toEndOf="@+id/minutes" />
+            android:layout_alignEnd="@+id/semesterspinner" />
 
         <TextView
             android:id="@+id/textView9"
@@ -190,7 +191,7 @@
             android:layout_height="wrap_content"
             android:layout_alignBaseline="@+id/reset"
             android:layout_alignBottom="@+id/reset"
-            android:layout_alignEnd="@+id/semesterspinner"
+            android:layout_toEndOf="@+id/minutes"
             android:text="Create" />
 
         <TextView

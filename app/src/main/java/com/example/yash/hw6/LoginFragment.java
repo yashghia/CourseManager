@@ -80,9 +80,9 @@ public class LoginFragment extends Fragment {
                     Toast.makeText(getActivity(),"Error :"+e.getMessage(),Toast.LENGTH_LONG).show();
                     Log.d("login error",e.getMessage());
                 }
-                finally {
+                /*finally {
                     realm.close();
-                }
+                }*/
             }
         });
     }

@@ -4,9 +4,7 @@ package com.example.yash.hw6;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -53,10 +51,6 @@ public class CreateCourseFragment extends Fragment implements InstructorAdapter.
     AlertDialog.Builder builder;
     public CreateCourseFragment() {
         // Required empty public constructor
-    }
-
-    public CreateCourseFragment(ArrayList<Instructor> instructors) {
-        this.instructors = instructors;
     }
 
     @Override

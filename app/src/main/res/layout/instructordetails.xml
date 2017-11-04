@@ -25,8 +25,8 @@
 
             <ImageView
                 android:id="@+id/instImage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 app:srcCompat="@mipmap/ic_launcher" />
@@ -35,10 +35,8 @@
                 android:id="@+id/instName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:layout_marginBottom="12dp"
-                android:layout_marginEnd="13dp"
-                android:layout_toStartOf="@+id/instImage"
+                android:layout_below="@+id/instImage"
+                android:layout_centerHorizontal="true"
                 android:text="Name" />
 
         </RelativeLayout>

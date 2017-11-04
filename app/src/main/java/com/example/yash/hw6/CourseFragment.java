@@ -42,20 +42,7 @@ public class CourseFragment extends Fragment {
         courseAdapter = new CourseAdapter(instructors,getActivity());
         courseViewList.setAdapter(courseAdapter);
         courseAdapter.notifyDataSetChanged();
-    }
-    public CourseFragment(ArrayList<Instructor> instructors) {
-        this.instructors = instructors;
-    }
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_course, container, false);
-    }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
         getView().findViewById(R.id.add).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -64,6 +51,12 @@ public class CourseFragment extends Fragment {
                         .commit();
             }
         });
+    }
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_course, container, false);
     }
 
 }
