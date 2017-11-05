@@ -46,11 +46,17 @@ public class CourseFragment extends Fragment {
             courseViewList = (RecyclerView) getView().findViewById(R.id.coursedesc);
             mLayoutManager = new LinearLayoutManager(getActivity());
             courseViewList.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-            courseAdapter = new CourseAdapter(courses, getActivity());
+            courseAdapter = new CourseAdapter(courses, CourseFragment.this);
             courseViewList.setAdapter(courseAdapter);
             courseAdapter.notifyDataSetChanged();
 
-            //courseViewList.setOnLongClickListener();
+            courseViewList.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+
+                    return false;
+                }
+            });
         }
 
         getView().findViewById(R.id.add).setOnClickListener(new View.OnClickListener() {
@@ -68,5 +74,4 @@ public class CourseFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_course, container, false);
     }
-
 }

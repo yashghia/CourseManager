@@ -17,8 +17,6 @@ import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
 
 /**
@@ -37,7 +35,7 @@ public class InstructorAdapter extends RecyclerView.Adapter<InstructorAdapter.Vi
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.instructordetails, parent, false);
+                .inflate(R.layout.instructordescription, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }

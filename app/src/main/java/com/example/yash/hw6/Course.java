@@ -17,7 +17,7 @@ public class Course extends RealmObject {
     String creditHours;
     String sem;
     String time;
-
+    private byte[] instPic;
 
     public String getTime() {
         return time;
@@ -26,8 +26,6 @@ public class Course extends RealmObject {
     public void setTime(String time) {
         this.time = time;
     }
-
-    private byte[] instPic;
 
     public String getTitle() {
         return title;
