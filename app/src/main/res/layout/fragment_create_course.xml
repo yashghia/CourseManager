@@ -90,19 +90,19 @@
             android:layout_alignStart="@+id/dayspinner"
             android:ems="10"
             android:hint="H"
-            android:inputType="textPersonName" />
+            android:inputType="number" />
 
         <EditText
             android:id="@+id/minutes"
             android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/dayspinner"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="19dp"
             android:layout_toEndOf="@+id/textView8"
-            android:layout_marginLeft="10dp"
             android:ems="10"
             android:hint="M"
-            android:inputType="textPersonName" />
+            android:inputType="number" />
 
         <TextView
             android:id="@+id/textView8"

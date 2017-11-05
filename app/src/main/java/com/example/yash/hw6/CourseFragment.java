@@ -6,9 +6,11 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -23,8 +25,8 @@ public class CourseFragment extends Fragment {
     RecyclerView courseViewList ;
     static CourseAdapter courseAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
-    ArrayList<Instructor> instructors = new ArrayList<>();
-
+    ArrayList<Course> courses = new ArrayList<>();
+    Realm realm;
     public CourseFragment() {
         // Required empty public constructor
     }
@@ -32,22 +34,30 @@ public class CourseFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        //instructors =  ArrayList(Realm.where(Instructor.class).findAll());
-        courseViewList = (RecyclerView)getView().findViewById(R.id.coursedesc);
-        //MainActivity.trackResultsList.add(1);
-        mLayoutManager = new LinearLayoutManager(getActivity());
-        //recycleViewList.setLayoutManager(mLayoutManager);
-        courseViewList.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
-        //recycleViewList.setHasFixedSize(false);
-        courseAdapter = new CourseAdapter(instructors,getActivity());
-        courseViewList.setAdapter(courseAdapter);
-        courseAdapter.notifyDataSetChanged();
+
+        realm = Realm.getDefaultInstance();
+        final RealmResults<Course> courseList = realm.where(Course.class).findAll();
+        if(courseList.size()==0){
+            Toast.makeText(getActivity(),"No Courses found in Database, Please add Course",Toast.LENGTH_LONG).show();
+        }
+        else {
+            courses.addAll(realm.copyFromRealm(courseList));
+            Log.d("coursedesc","size: "+courses.size());
+            courseViewList = (RecyclerView) getView().findViewById(R.id.coursedesc);
+            mLayoutManager = new LinearLayoutManager(getActivity());
+            courseViewList.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+            courseAdapter = new CourseAdapter(courses, getActivity());
+            courseViewList.setAdapter(courseAdapter);
+            courseAdapter.notifyDataSetChanged();
+
+            //courseViewList.setOnLongClickListener();
+        }
 
         getView().findViewById(R.id.add).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 getFragmentManager().beginTransaction()
-                        .replace(R.id.container,new CreateCourseFragment(),"createcourse")
+                        .replace(R.id.container, new CreateCourseFragment(), "createcourse")
                         .commit();
             }
         });

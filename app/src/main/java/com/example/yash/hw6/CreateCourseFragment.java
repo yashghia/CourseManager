@@ -4,6 +4,8 @@ package com.example.yash.hw6;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -21,6 +23,7 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 import io.realm.Realm;
@@ -40,13 +43,14 @@ public class CreateCourseFragment extends Fragment implements InstructorAdapter.
     Spinner daySpinner;
     Spinner timeSpinner;
     Spinner semSpinner;
-    String hours;
-    String minutes;
+    ArrayAdapter<CharSequence> semAdapter;
+    ArrayAdapter<CharSequence> dayAdapter;
+    ArrayAdapter<CharSequence> timeAdapter;
     RadioGroup rg;
     String credithours;
-    String day;
-    String time;
-    String sem;
+    String day="Monday";
+    String time="AM";
+    String sem="Fall";
     private RecyclerView.LayoutManager mLayoutManager;
     AlertDialog.Builder builder;
     public CreateCourseFragment() {
@@ -86,25 +90,27 @@ public class CreateCourseFragment extends Fragment implements InstructorAdapter.
             recycleAdapter.notifyDataSetChanged();
 
             daySpinner = (Spinner)getView().findViewById(R.id.dayspinner);
-            ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
+            dayAdapter = ArrayAdapter.createFromResource(getActivity(),
             R.array.days, android.R.layout.simple_spinner_item);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            daySpinner.setAdapter(adapter);
+            dayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            daySpinner.setAdapter(dayAdapter);
 
             timeSpinner = (Spinner)getView().findViewById(R.id.timespinner);
-            adapter = ArrayAdapter.createFromResource(getActivity(),
+            timeAdapter = ArrayAdapter.createFromResource(getActivity(),
                     R.array.time, android.R.layout.simple_spinner_item);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            timeSpinner.setAdapter(adapter);
+            timeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            timeSpinner.setAdapter(timeAdapter);
 
             semSpinner = (Spinner)getView().findViewById(R.id.semesterspinner);
-            adapter = ArrayAdapter.createFromResource(getActivity(),
+            semAdapter = ArrayAdapter.createFromResource(getActivity(),
                     R.array.semester, android.R.layout.simple_spinner_item);
-            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            semSpinner.setAdapter(adapter);
+            semAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            semSpinner.setAdapter(semAdapter);
 
-            hours = ((EditText)getView().findViewById(R.id.hours)).getText().toString();
-            minutes = ((EditText)getView().findViewById(R.id.minutes)).getText().toString();
+            daySpinner.setOnItemSelectedListener(this);
+            timeSpinner.setOnItemSelectedListener(this);
+            semSpinner.setOnItemSelectedListener(this);
+
             rg = (RadioGroup)getView().findViewById(R.id.radioGroup);
             rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
                 @Override
@@ -124,12 +130,21 @@ public class CreateCourseFragment extends Fragment implements InstructorAdapter.
                 public void onClick(View v) {
 
                     course.setTitle(((EditText)getView().findViewById(R.id.editText)).getText().toString());
-                    course.setDay(day);
-                    course.setHours(hours);
-                    course.setMinutes(minutes);
+                    Log.d("dayvalue","daySpinner.getSelectedItem().toString(): "+daySpinner.getSelectedItem().toString());
+                    Log.d("dayvalue","day :"+day);
+                    course.setDay(daySpinner.getSelectedItem().toString());
+                    course.setHours(((EditText)getView().findViewById(R.id.hours)).getText().toString());
+                    course.setMinutes(((EditText)getView().findViewById(R.id.minutes)).getText().toString());
+                    course.setTime(timeSpinner.getSelectedItem().toString());
                     course.setCreditHours(credithours);
-                    course.setSem(sem);
-                    realm.copyToRealmOrUpdate(course);
+                    course.setSem(semSpinner.getSelectedItem().toString());
+                    realm.executeTransaction(new Realm.Transaction() {
+                        @Override
+                        public void execute(Realm realm) {
+                            realm.copyToRealmOrUpdate(course);
+                        }
+                    });
+                    getFragmentManager().beginTransaction().replace(R.id.container,new CourseFragment(),"course").commit();
                 }
             });
         }
@@ -143,6 +158,10 @@ public class CreateCourseFragment extends Fragment implements InstructorAdapter.
                                 ((EditText)getView().findViewById(R.id.hours)).setText("");
                                 ((EditText)getView().findViewById(R.id.minutes)).setText("");
                                 ((EditText)getView().findViewById(R.id.editText)).setText("");
+                                timeSpinner.setAdapter(timeAdapter);
+                                daySpinner.setAdapter(dayAdapter);
+                                semSpinner.setAdapter(semAdapter);
+                                rg.clearCheck();
                             }
                         }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
                     @Override
@@ -158,24 +177,20 @@ public class CreateCourseFragment extends Fragment implements InstructorAdapter.
     }
 
     @Override
-    public void selected(Instructor instructor) {
+    public void selected(Instructor instructor,ArrayList<Instructor> instructors) {
         course.setInstName(instructor.getFname());
         course.setInstPic(instructor.getPic());
+        recycleAdapter = new InstructorAdapter(instructors,getActivity(),CreateCourseFragment.this);
+        recycleViewList.setAdapter(recycleAdapter);
+        recycleAdapter.notifyDataSetChanged();
     }
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        if(parent.getId()==daySpinner.getId()){
-            day = parent.getItemAtPosition(position).toString();
-        } else if(parent.getId()==timeSpinner.getId()){
-            time = parent.getItemAtPosition(position).toString();
-        } else if(parent.getId()==semSpinner.getId()){
-            sem = parent.getItemAtPosition(position).toString();
-        }
+        Log.d("spinnerselect","entered");
     }
 
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
-
     }
 }

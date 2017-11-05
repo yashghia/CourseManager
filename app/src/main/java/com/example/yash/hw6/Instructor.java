@@ -9,6 +9,16 @@ import io.realm.RealmObject;
 public class Instructor extends RealmObject {
     String fname,email,website;
     byte[] pic;
+    boolean isChecked = false;
+
+
+    public boolean isChecked() {
+        return isChecked;
+    }
+
+    public void setChecked(boolean checked) {
+        isChecked = checked;
+    }
 
     public byte[] getPic() {
         return pic;

@@ -49,10 +49,22 @@ public class InstructorAdapter extends RecyclerView.Adapter<InstructorAdapter.Vi
         holder.instructorAdapter = instructor;
         holder.name.setText(instructor.getFname());
         holder.instImage.setImageBitmap(BitmapFactory.decodeByteArray(instructor.getPic(), 0, instructor.getPic().length));
+        Log.d("binding","Instrutor: "+instructor.getFname()+" checkbutton: "+instructor.isChecked());
+        holder.selected.setChecked(instructor.isChecked);
         holder.selected.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                inst.selected(instructor);
+                for (Instructor i:instructorsResults) {
+                    if(i.equals(instructor)) {
+                        Log.d("buttonchecktrue","Instrutor: "+i.getFname()+" checkbutton: "+i.isChecked());
+                        i.setChecked(true);
+                    }
+                    else{
+                        Log.d("buttoncheckfalse","Instrutor: "+i.getFname()+" checkbutton: "+i.isChecked());
+                        i.setChecked(false);
+                    }
+                }
+                inst.selected(instructor,instructorsResults);
             }
         });
         }
@@ -77,6 +89,6 @@ public class InstructorAdapter extends RecyclerView.Adapter<InstructorAdapter.Vi
     }
 
     interface IselectedInstructor{
-        void selected(Instructor instructor);
+        void selected(Instructor instructor,ArrayList<Instructor> instructors);
     }
 }

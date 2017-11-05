@@ -1,5 +1,6 @@
 package com.example.yash.hw6;
 import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
 
 /**
  * Created by yash_ on 11/2/2017.
@@ -7,7 +8,25 @@ import io.realm.RealmObject;
 
 public class Course extends RealmObject {
 
-    String title,instName,day,hours,minutes,creditHours,sem;
+    @PrimaryKey
+    String title;
+    String instName;
+    String day;
+    String hours;
+    String minutes;
+    String creditHours;
+    String sem;
+    String time;
+
+
+    public String getTime() {
+        return time;
+    }
+
+    public void setTime(String time) {
+        this.time = time;
+    }
+
     private byte[] instPic;
 
     public String getTitle() {
