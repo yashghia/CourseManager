@@ -2,16 +2,13 @@ package com.example.yash.hw6;
 
 import android.app.AlertDialog;
 import android.app.Fragment;
-import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,57 +18,57 @@ import io.realm.Realm;
 import io.realm.RealmResults;
 
 /**
- * Created by teja on 11/3/17.
+ * Created by yash_ on 11/5/2017.
  */
 
-public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder>{
+public class InstructorDescriptionAdaptor extends RecyclerView.Adapter<InstructorDescriptionAdaptor.ViewHolder> {
+
+    ArrayList<Instructor> instructorsArrayList;
     static Realm realm;
-    static ArrayList<Course> courseArrayList;
     static Fragment fragment;
     static AlertDialog.Builder builder;
+    IdeletedInstructor ideletedInstructor;
     static int pos;
-    static IdeletedCourse ideletedCourse;
 
-    public CourseAdapter(ArrayList<Course> courses, Fragment fragment, IdeletedCourse ideletedCourse) {
-        this.courseArrayList = courses;
+    public InstructorDescriptionAdaptor(ArrayList<Instructor> instructorsArrayList, Fragment fragment, IdeletedInstructor ideletedInstructor){
+        this.instructorsArrayList = instructorsArrayList;
+        this.ideletedInstructor = ideletedInstructor;
         this.fragment = fragment;
-        this.ideletedCourse = ideletedCourse;
     }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.coursedescription, parent, false);
+                .inflate(R.layout.instructor_details, parent, false);
         ViewHolder viewHolder = new ViewHolder(view);
         return viewHolder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Course course = courseArrayList.get(position);
-        holder.details = course;
-        holder.titleTextView.setText(course.getTitle());
-        holder.instructorTextView.setText(course.getInstName());
-        holder.timeTextView.setText(course.getHours()+":"+course.getMinutes()+" "+course.getTime());
-        holder.dayTextView.setText(course.getDay());
-        holder.instructorImageView.setImageBitmap(BitmapFactory.decodeByteArray(course.getInstPic(), 0, course.getInstPic().length));
-    }
-    @Override
-    public int getItemCount() {
-        return courseArrayList.size();
+        Instructor instructor = instructorsArrayList.get(position);
+        holder.instructor = instructor;
+        holder.nameTextView.setText(instructor.getFname());
+        holder.emailTextView.setText(instructor.getEmail());
+        holder.websiteTextView.setText(instructor.getWebsite());
+        holder.instructorImageView.setImageBitmap(BitmapFactory.decodeByteArray(instructor.getPic(), 0, instructor.getPic().length));
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
-        TextView titleTextView, instructorTextView,dayTextView,timeTextView;
+    @Override
+    public int getItemCount() {
+        return instructorsArrayList.size();
+    }
+
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        TextView nameTextView, emailTextView, websiteTextView;
         ImageView instructorImageView;
-        static Course details;
+        Instructor instructor;
         public ViewHolder(View itemView) {
             super(itemView);
             builder = new AlertDialog.Builder(itemView.getContext());
-            titleTextView = (TextView) itemView.findViewById(R.id.title);
-            instructorTextView = (TextView) itemView.findViewById(R.id.inst);
-            dayTextView = (TextView) itemView.findViewById(R.id.day);
-            timeTextView = (TextView) itemView.findViewById(R.id.time);
-            instructorImageView = (ImageView) itemView.findViewById(R.id.instructorImage);
+            nameTextView = (TextView) itemView.findViewById(R.id.idetailname);
+            emailTextView = (TextView) itemView.findViewById(R.id.iemail);
+            websiteTextView = (TextView) itemView.findViewById(R.id.iwebsite);
+            instructorImageView = (ImageView) itemView.findViewById(R.id.instProfileImage);
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
@@ -81,20 +78,20 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
                                 public void onClick(DialogInterface dialogInterface, int i) {
                                     realm = Realm.getDefaultInstance();
                                     pos = getAdapterPosition();
-                                    Course delCourse = courseArrayList.get(pos);
-                                    Log.d("deletecourse",""+delCourse.getTitle());
-                                    courseArrayList.remove(delCourse);
-                                    final RealmResults<Course> courses = realm.where(Course.class).findAll();
-                                    Course course = courses.where().equalTo("title",delCourse.getTitle()).findFirst();
+                                    Instructor delInst = instructorsArrayList.get(pos);
+                                    Log.d("deletecourse",""+delInst.getFname());
+                                    instructorsArrayList.remove(delInst);
+                                    final RealmResults<Instructor> instructors = realm.where(Instructor.class).findAll();
+                                    Instructor instructor = instructors.where().equalTo("email",delInst.getEmail()).findFirst();
 
-                                    if(course!=null){
+                                    if(instructor!=null){
                                         if (!realm.isInTransaction()) {
                                             realm.beginTransaction();
                                         }
-                                        course.deleteFromRealm();
+                                        instructor.deleteFromRealm();
                                         realm.commitTransaction();
                                     }
-                                    ideletedCourse.deletedCourseRefresh(courseArrayList);
+                                    ideletedInstructor.deletedInstructorRefresh(instructorsArrayList);
                                 }
                             }).setNegativeButton("NO", new DialogInterface.OnClickListener() {
                         @Override
@@ -111,15 +108,15 @@ public class CourseAdapter extends RecyclerView.Adapter<CourseAdapter.ViewHolder
                 @Override
                 public void onClick(View v) {
                     int i = getAdapterPosition();
-                    Course delCourse = courseArrayList.get(i);
+                    Instructor instructordetails = instructorsArrayList.get(i);
                     fragment.getFragmentManager().beginTransaction()
-                            .replace(R.id.container,new CourseDetailsFragment(delCourse),"coursedetails")
+                            .replace(R.id.container,new InstructorDetailsFragment(instructordetails),"coursedetails")
                             .commit();
                 }
             });
         }
     }
-    interface IdeletedCourse{
-        void deletedCourseRefresh(ArrayList<Course> courses);
+    interface IdeletedInstructor{
+        void deletedInstructorRefresh(ArrayList<Instructor> instructors);
     }
 }

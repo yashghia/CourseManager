@@ -1,10 +1,12 @@
 package com.example.yash.hw6;
 
 
+import android.annotation.SuppressLint;
 import android.app.Fragment;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,12 +17,17 @@ import android.widget.TextView;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CourseDetailsFragment extends Fragment implements CourseAdapter.ICourseDetails{
+public class CourseDetailsFragment extends Fragment{
 
-    Course course = new Course();
+    Course course;
 
     public CourseDetailsFragment() {
         // Required empty public constructor
+    }
+    @SuppressLint("ValidFragment")
+    public CourseDetailsFragment(Course course) {
+        this.course=course;
+        Log.d("coursedetails",""+course.getTitle());
     }
 
     @Override
@@ -44,8 +51,4 @@ public class CourseDetailsFragment extends Fragment implements CourseAdapter.ICo
         return inflater.inflate(R.layout.fragment_course_details, container, false);
     }
 
-    @Override
-    public void details(Course course) {
-        this.course = course;
-    }
 }

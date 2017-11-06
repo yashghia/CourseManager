@@ -19,16 +19,16 @@
         android:layout_marginTop="60dp"
         app:srcCompat="@mipmap/ic_launcher" />
 
-    <EditText
-        android:id="@+id/ifname"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="49dp"
-        android:ems="10"
-        android:hint="First Name"
-        android:inputType="textPersonName"
-        android:layout_below="@+id/instructorImage"
-        android:layout_centerHorizontal="true" />
+        <EditText
+            android:id="@+id/ifname"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/instructorImage"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="49dp"
+            android:ems="10"
+            android:hint="Full Name"
+            android:inputType="textPersonName" />
 
         <EditText
             android:id="@+id/email"

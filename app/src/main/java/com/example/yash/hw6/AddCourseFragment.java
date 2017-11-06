@@ -4,8 +4,6 @@ package com.example.yash.hw6;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -20,21 +18,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.TextView;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 import io.realm.Realm;
-import io.realm.RealmConfiguration;
 import io.realm.RealmResults;
 
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class CreateCourseFragment extends Fragment implements InstructorAdapter.IselectedInstructor, AdapterView.OnItemSelectedListener {
+public class AddCourseFragment extends Fragment implements InstructorAdapter.IselectedInstructor, AdapterView.OnItemSelectedListener{
 
     Realm realm;
     Course course;
@@ -53,7 +48,7 @@ public class CreateCourseFragment extends Fragment implements InstructorAdapter.
     String sem="Fall";
     private RecyclerView.LayoutManager mLayoutManager;
     AlertDialog.Builder builder;
-    public CreateCourseFragment() {
+    public AddCourseFragment() {
         // Required empty public constructor
     }
 
@@ -85,7 +80,7 @@ public class CreateCourseFragment extends Fragment implements InstructorAdapter.
             mLayoutManager = new LinearLayoutManager(getActivity());
             recycleViewList.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.HORIZONTAL,false));
             instructors.addAll(realm.copyFromRealm(Instructor));
-            recycleAdapter = new InstructorAdapter(instructors,getActivity(),CreateCourseFragment.this);
+            recycleAdapter = new InstructorAdapter(instructors,getActivity(),AddCourseFragment.this);
             recycleViewList.setAdapter(recycleAdapter);
             recycleAdapter.notifyDataSetChanged();
 
@@ -180,7 +175,7 @@ public class CreateCourseFragment extends Fragment implements InstructorAdapter.
     public void selected(Instructor instructor,ArrayList<Instructor> instructors) {
         course.setInstName(instructor.getFname());
         course.setInstPic(instructor.getPic());
-        recycleAdapter = new InstructorAdapter(instructors,getActivity(),CreateCourseFragment.this);
+        recycleAdapter = new InstructorAdapter(instructors,getActivity(),AddCourseFragment.this);
         recycleViewList.setAdapter(recycleAdapter);
         recycleAdapter.notifyDataSetChanged();
     }
@@ -193,4 +188,5 @@ public class CreateCourseFragment extends Fragment implements InstructorAdapter.
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
     }
+
 }

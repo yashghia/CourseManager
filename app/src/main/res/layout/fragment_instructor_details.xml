@@ -1,0 +1,76 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.yash.hw6.InstructorDetailsFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <TextView
+            android:id="@+id/textView11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="61dp"
+            android:layout_marginTop="52dp"
+            android:text="Instructor Name :" />
+
+        <TextView
+            android:id="@+id/insName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textView11"
+            android:layout_marginStart="37dp"
+            android:layout_toEndOf="@+id/textView11"
+            android:text="Full Name" />
+
+        <ImageView
+            android:id="@+id/insPic"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_below="@+id/textView11"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="56dp"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:id="@+id/textView15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView11"
+            android:layout_below="@+id/insPic"
+            android:layout_marginTop="46dp"
+            android:text="Instructor EmaiID :" />
+
+        <TextView
+            android:id="@+id/insEmail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/insName"
+            android:layout_alignTop="@+id/textView15"
+            android:text="EmaiID" />
+
+        <TextView
+            android:id="@+id/id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView15"
+            android:layout_below="@+id/textView15"
+            android:layout_marginTop="62dp"
+            android:text="Website URL" />
+
+        <TextView
+            android:id="@+id/insWebsite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/insEmail"
+            android:layout_alignTop="@+id/id"
+            android:text="URL" />
+    </RelativeLayout>
+
+</FrameLayout>

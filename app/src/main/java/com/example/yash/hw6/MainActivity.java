@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
                 getFragmentManager().beginTransaction().replace(R.id.container,new CourseFragment(),"course").commit();
                 return true;
             case R.id.instructors:
-                //getFragmentManager().beginTransaction().replace(R.id.container,new (),"course").commit();
+                getFragmentManager().beginTransaction().replace(R.id.container,new InstructorFragment(),"instructor").commit();
                 return true;
             case R.id.addInstructors:
                 getFragmentManager().beginTransaction().replace(R.id.container,new AddInstructorFragment(),"addinst").commit();
@@ -43,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
                 getFragmentManager().beginTransaction().replace(R.id.container,new LoginFragment(),"login").commit();
                 return true;
             case R.id.exit:
+                finish();
+                moveTaskToBack(true);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
