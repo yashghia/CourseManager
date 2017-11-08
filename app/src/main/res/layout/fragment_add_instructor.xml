@@ -53,21 +53,24 @@
             android:inputType="textPersonName" />
 
         <Button
-            android:id="@+id/save"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/website"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="18dp"
-            android:text="Save" />
-
-        <Button
             android:id="@+id/reset"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/save"
             android:layout_alignStart="@+id/website"
+            android:layout_below="@+id/website"
+            android:layout_marginTop="24dp"
             android:text="Reset" />
+
+        <Button
+            android:id="@+id/save"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/reset"
+            android:layout_alignBottom="@+id/reset"
+            android:layout_alignEnd="@+id/website"
+            android:layout_marginEnd="24dp"
+            android:text="Register" />
+
     </RelativeLayout>
 
 </FrameLayout>

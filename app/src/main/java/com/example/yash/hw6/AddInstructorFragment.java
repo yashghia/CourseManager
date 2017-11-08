@@ -21,8 +21,6 @@ import android.widget.Toast;
 import java.io.ByteArrayOutputStream;
 
 import io.realm.Realm;
-import io.realm.RealmConfiguration;
-import io.realm.RealmResults;
 
 import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
@@ -32,7 +30,7 @@ import static android.app.Activity.RESULT_OK;
  * A simple {@link Fragment} subclass.
  */
 public class AddInstructorFragment extends Fragment {
-
+    EditText fName, emailName, websiteName;
     Realm realm;
     private static final int CAMERA_CAPTURE_IMAGE_REQUEST_CODE = 100;
     ImageView image;
@@ -74,12 +72,18 @@ public class AddInstructorFragment extends Fragment {
         getView().findViewById(R.id.save).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    realm = Realm.getDefaultInstance();
-                    //RealmConfiguration config = new RealmConfiguration.Builder().name("instructor.realm").build();
-                    //Realm.setDefaultConfiguration(config);
-                    //final RealmResults<Instructor> Instructor = realm.where(Instructor.class).equalTo("fname", ((EditText) getView().findViewById(R.id.ifname)).getText().toString()).findAll();
-                    //if (Instructor.size() == 0) {
+                fName = (EditText) getView().findViewById(R.id.ifname);
+                emailName = (EditText) getView().findViewById(R.id.email);
+                websiteName = (EditText) getView().findViewById(R.id.website);
+                String emailText = emailName.getText().toString().trim();
+                String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
+                if (!fName.getText().toString().equals("") && !emailName.getText().toString().equals("") && !websiteName.getText().toString().equals("") && emailText.matches(emailPattern)) {
+                    try {
+                        realm = Realm.getDefaultInstance();
+                        //RealmConfiguration config = new RealmConfiguration.Builder().name("instructor.realm").build();
+                        //Realm.setDefaultConfiguration(config);
+                        //final RealmResults<Instructor> Instructor = realm.where(Instructor.class).equalTo("fname", ((EditText) getView().findViewById(R.id.ifname)).getText().toString()).findAll();
+                        //if (Instructor.size() == 0) {
                         realm.executeTransaction(new Realm.Transaction() {
                             @Override
                             public void execute(Realm realm) {
@@ -99,6 +103,7 @@ public class AddInstructorFragment extends Fragment {
                                 }
                             }
                         });
+                        Toast.makeText(getActivity(), "Instructor has been added successfully", Toast.LENGTH_LONG).show();
                         getFragmentManager().beginTransaction()
                                 .replace(R.id.container, new CourseFragment(), "courses")
                                 .commit();
@@ -106,12 +111,13 @@ public class AddInstructorFragment extends Fragment {
                     else{
                         Toast.makeText(getActivity(),"Instructor name already exists",Toast.LENGTH_LONG).show();
                     }*/
-                }
-                catch (Exception e){
-                    Toast.makeText(getActivity(),e.getMessage(),Toast.LENGTH_LONG).show();
-                }
-                finally {
-                    realm.close();
+                    } catch (Exception e) {
+                        Toast.makeText(getActivity(), e.getMessage(), Toast.LENGTH_LONG).show();
+                    } finally {
+                        realm.close();
+                    }
+                }else {
+                    Toast.makeText(getActivity(), "Please make sure to enter valid email and all the details", Toast.LENGTH_LONG).show();
                 }
             }
         });

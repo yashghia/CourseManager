@@ -90,6 +90,7 @@
             android:layout_alignStart="@+id/dayspinner"
             android:ems="10"
             android:hint="H"
+            android:maxLength="2"
             android:inputType="number" />
 
         <EditText
@@ -97,12 +98,12 @@
             android:layout_width="30dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/dayspinner"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="19dp"
-            android:layout_toEndOf="@+id/textView8"
+            android:layout_marginTop="20dp"
+            android:layout_toEndOf="@+id/textView4"
             android:ems="10"
             android:hint="M"
-            android:inputType="number" />
+            android:inputType="number"
+            android:maxLength="2" />
 
         <TextView
             android:id="@+id/textView8"
@@ -119,7 +120,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/textView8"
-            android:layout_alignEnd="@+id/semesterspinner" />
+            android:layout_marginStart="44dp"
+            android:layout_toEndOf="@+id/minutes" />
 
         <TextView
             android:id="@+id/textView9"
@@ -176,24 +178,6 @@
             android:layout_alignBottom="@+id/textView10"
             android:layout_toEndOf="@+id/textView9" />
 
-        <Button
-            android:id="@+id/reset"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="32dp"
-            android:layout_toStartOf="@+id/radioGroup"
-            android:text="Reset" />
-
-        <Button
-            android:id="@+id/create"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/reset"
-            android:layout_alignBottom="@+id/reset"
-            android:layout_toEndOf="@+id/minutes"
-            android:text="Create" />
-
         <TextView
             android:id="@+id/noInstructor"
             android:layout_width="wrap_content"
@@ -203,6 +187,25 @@
             android:layout_marginTop="42dp"
             android:text="You haven’t added any instructor yet, please add at least one instructor to continue."
             android:visibility="invisible"/>
+
+        <Button
+            android:id="@+id/resetButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/textView10"
+            android:layout_below="@+id/textView10"
+            android:layout_marginTop="21dp"
+            android:text="Reset" />
+
+        <Button
+            android:id="@+id/create"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/resetButton"
+            android:layout_alignStart="@+id/timespinner"
+            android:layout_marginStart="11dp"
+            android:text="Create" />
+
     </RelativeLayout>
 
 </FrameLayout>
