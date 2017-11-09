@@ -21,6 +21,16 @@ public class User extends RealmObject {
     @Required
     private byte[] pic;
 
+    public int getUserid() {
+        return userid;
+    }
+
+    public void setUserid(int userid) {
+        this.userid = userid;
+    }
+
+    private int userid = 0;
+
     public String getFirstName() {
         return firstName;
     }

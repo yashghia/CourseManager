@@ -34,9 +34,10 @@ public class CourseFragment extends Fragment implements CourseAdapter.IdeletedCo
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         realm = Realm.getDefaultInstance();
-        final RealmResults<Course> courseList = realm.where(Course.class).findAll();
+        final RealmResults<Course> courseList = realm.where(Course.class)
+                .equalTo("userid",MainActivity.getPreference(getActivity(),"userid"))
+                .findAll();
         if(courseList.size()==0){
             Toast.makeText(getActivity(),"No Courses found in Database, Please add Course",Toast.LENGTH_LONG).show();
         }

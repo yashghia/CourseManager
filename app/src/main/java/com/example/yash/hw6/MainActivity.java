@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Realm.init(this);
+        setTitle("Course Manager");
         getFragmentManager().beginTransaction().add(R.id.container,new LoginFragment(),"default").commit();
     }
 
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.home:
                 if(isLoggedIn) {
+                    setTitle("Course Manager");
                     getFragmentManager().beginTransaction().replace(R.id.container, new CourseFragment(), "course").commit();
                 }
                 else{
@@ -46,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.instructors:
                 if(isLoggedIn) {
+                    setTitle("Instructor Manager");
                     getFragmentManager().beginTransaction().replace(R.id.container, new InstructorFragment(), "instructor").commit();
                 }
                 else{
@@ -54,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.addInstructors:
                 if(isLoggedIn) {
+                    setTitle("Add Instructor");
                     getFragmentManager().beginTransaction().replace(R.id.container, new AddInstructorFragment(), "addinst").commit();
                 }
                 else{
@@ -72,16 +76,20 @@ public class MainActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
-    public static void setPreference(Context context, String key, Boolean value) {
+    public static void setPreference(Context context, String key, int value) {
         SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = settings.edit();
-        editor.putBoolean(key, value);
+        editor.putInt(key, value);
         editor.commit();
     }
 
-    public static boolean getPreference(Context context, String key) {
+    public static int getPreference(Context context, String key) {
         SharedPreferences settings = context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE);
-        return settings.getBoolean(key, false);
+        return settings.getInt(key,0);
+    }
+
+    public void setTitle(){
+        setTitle("Add Course");
     }
 
 }

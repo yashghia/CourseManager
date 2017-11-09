@@ -95,6 +95,8 @@ public class AddInstructorFragment extends Fragment {
                                 newInst.setFname(((EditText) getView().findViewById(R.id.ifname)).getText().toString());
                                 newInst.setEmail(((EditText) getView().findViewById(R.id.email)).getText().toString());
                                 newInst.setWebsite(((EditText) getView().findViewById(R.id.website)).getText().toString());
+                                newInst.setUserid(MainActivity.getPreference(getActivity(),"userid"));
+                                Log.d("addinst-userid ",""+newInst.getUserid());
                                 Bitmap bitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
                                 if (image != null) {
                                     ByteArrayOutputStream bos = new ByteArrayOutputStream();

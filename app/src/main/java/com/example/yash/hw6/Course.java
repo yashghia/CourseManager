@@ -17,7 +17,17 @@ public class Course extends RealmObject {
     String creditHours;
     String sem;
     String time;
-    private byte[] instPic;
+    int userid;
+
+    public int getUserid() {
+        return userid;
+    }
+
+    public void setUserid(int userid) {
+        this.userid = userid;
+    }
+
+    private byte[] instPic=new byte[0];
 
     public String getTime() {
         return time;

@@ -11,6 +11,16 @@ public class Instructor extends RealmObject {
     byte[] pic;
     boolean isChecked = false;
 
+    public int getUserid() {
+        return userid;
+    }
+
+    public void setUserid(int userid) {
+        this.userid = userid;
+    }
+
+    int userid;
+
 
     public boolean isChecked() {
         return isChecked;

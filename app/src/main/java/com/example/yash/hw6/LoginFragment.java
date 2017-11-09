@@ -64,6 +64,7 @@ public class LoginFragment extends Fragment {
                                 final User user = realm.where(User.class).equalTo("userName", username).findFirst();
                                 if (user != null && user.getPassword().equals(password)) {
                                     MainActivity.isLoggedIn = true;
+                                    MainActivity.setPreference(getActivity(),"userid",user.getUserid());
                                     Log.d("user", "fname " + user.getFirstName() + " lname " + user.getLastName() + " uname " + user.getUserName() + " password " + user.getPassword());
                                     getFragmentManager().beginTransaction()
                                             .replace(R.id.container, new CourseFragment(), "courses")

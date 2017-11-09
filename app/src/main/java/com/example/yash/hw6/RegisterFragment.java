@@ -62,8 +62,10 @@ public class RegisterFragment extends Fragment {
                         //realm = Realm.getDefaultInstance();
                         //RealmConfiguration config = new RealmConfiguration.Builder().name("login.realm").build();
                         //Realm.setDefaultConfiguration(config);
+                        final RealmResults<User> userList = realm.where(User.class).findAll();
                         final RealmResults<User> users = realm.where(User.class).equalTo("userName", ((EditText) getView().findViewById(R.id.uname)).getText().toString()).findAll();
                         if (users.size() == 0) {
+                            //final User newUser = realm.createObject(User.class);
                             realm.executeTransaction(new Realm.Transaction() {
                                 @Override
                                 public void execute(Realm realm) {
@@ -73,7 +75,8 @@ public class RegisterFragment extends Fragment {
                                     newUser.setLastName(lastName.getText().toString());
                                     newUser.setUserName(userName.getText().toString());
                                     newUser.setPassword(password.getText().toString());
-
+                                    newUser.setUserid(userList.size()+1);
+                                    Log.d("newregistration-userid ",""+newUser.getUserid());
                                     Bitmap bitmap = ((BitmapDrawable) image.getDrawable()).getBitmap();
                                     if (image != null) {
                                         ByteArrayOutputStream bos = new ByteArrayOutputStream();
@@ -83,9 +86,11 @@ public class RegisterFragment extends Fragment {
                                     } else {
                                         newUser.setPic(bArray);
                                     }
+                                    MainActivity.setPreference(getActivity(),"userid",newUser.getUserid());
                                 }
                             });
                             Toast.makeText(getActivity(), "You have been registered succesfully", Toast.LENGTH_LONG).show();
+                            MainActivity.isLoggedIn = true;
                             getFragmentManager().beginTransaction()
                                     .replace(R.id.container, new CourseFragment(), "courses")
                                     .commit();

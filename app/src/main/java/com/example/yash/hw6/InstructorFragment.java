@@ -32,7 +32,9 @@ public class InstructorFragment extends Fragment implements InstructorDescriptio
         super.onActivityCreated(savedInstanceState);
 
         realm = Realm.getDefaultInstance();
-        final RealmResults<Instructor> instructorList = realm.where(Instructor.class).findAll();
+        final RealmResults<Instructor> instructorList = realm.where(Instructor.class)
+                .equalTo("userid",MainActivity.getPreference(getActivity(),"userid"))
+                .findAll();
         if(instructorList.size()==0){
             Toast.makeText(getActivity(),"No Instructors found in Database, Please add Instructor",Toast.LENGTH_LONG).show();
         }

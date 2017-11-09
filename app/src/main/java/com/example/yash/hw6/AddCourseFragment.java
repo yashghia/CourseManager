@@ -76,7 +76,9 @@ public class AddCourseFragment extends Fragment implements InstructorAdapter.Ise
         ArrayList<Instructor> instructors = new ArrayList<>();
         //RealmConfiguration config = new RealmConfiguration.Builder().name("instructor.realm").build();
         //Realm.setDefaultConfiguration(config);
-        final RealmResults<Instructor> Instructor = realm.where(Instructor.class).findAll();
+        final RealmResults<Instructor> Instructor = realm.where(Instructor.class)
+                .equalTo("userid",MainActivity.getPreference(getActivity(),"userid"))
+                .findAll();
         if (Instructor.size() == 0) {
             ((TextView) getView().findViewById(R.id.noInstructor)).setVisibility(View.VISIBLE);
             ((Button) getView().findViewById(R.id.create)).setEnabled(false);
@@ -143,7 +145,8 @@ public class AddCourseFragment extends Fragment implements InstructorAdapter.Ise
 //                    String radioButtonText = selectedRadioButton.getText().toString();
                     String hours = hoursEdit.getText().toString();
                     String minutes = minutesEdit.getText().toString();
-                if (!titleText.equals("") && !day.equals("") && !time.equals("") && !hours.equals("") && !minutes.equals("") && rg.getCheckedRadioButtonId()!=-1){
+                if (!titleText.equals("") && !day.equals("") && !time.equals("") && !hours.equals("")
+                        && !minutes.equals("") && rg.getCheckedRadioButtonId()!=-1 && !(course.getInstPic().length==0)){
                         course.setTitle(((EditText) getView().findViewById(R.id.editText)).getText().toString());
                         Log.d("dayvalue", "daySpinner.getSelectedItem().toString(): " + daySpinner.getSelectedItem().toString());
                         Log.d("dayvalue", "day :" + day);
@@ -153,10 +156,12 @@ public class AddCourseFragment extends Fragment implements InstructorAdapter.Ise
                         course.setTime(timeSpinner.getSelectedItem().toString());
                         course.setCreditHours(credithours);
                         course.setSem(semSpinner.getSelectedItem().toString());
+                        course.setUserid(MainActivity.getPreference(getActivity(),"userid"));
+                        Log.d("addcourse-userid ",""+course.getUserid());
                         realm.executeTransaction(new Realm.Transaction() {
                             @Override
                             public void execute(Realm realm) {
-                                realm.copyToRealmOrUpdate(course);
+                                realm.copyToRealm(course);
                             }
                         });
                         Toast.makeText(getActivity(), "New course has been created successfully", Toast.LENGTH_LONG).show();
