@@ -1,3 +1,6 @@
+//Prabhakar Teja Seeda
+//Yash Ghia
+//Homework 6
 package com.example.yash.hw6;
 
 
@@ -156,9 +159,10 @@ public class AddCourseFragment extends Fragment implements InstructorAdapter.Ise
                                 realm.copyToRealmOrUpdate(course);
                             }
                         });
+                        Toast.makeText(getActivity(), "New course has been created successfully", Toast.LENGTH_LONG).show();
                         getFragmentManager().beginTransaction().replace(R.id.container, new CourseFragment(), "course").commit();
                     }else{
-                    Toast.makeText(getActivity(), "Make sure you have selected all credentials", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Make sure you have entered all credentials", Toast.LENGTH_LONG).show();
                 }
                 }
             });

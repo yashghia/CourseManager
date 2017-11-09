@@ -1,3 +1,6 @@
+//Prabhakar Teja Seeda
+//Yash Ghia
+//Homework 6
 package com.example.yash.hw6;
 
 import android.content.Context;
@@ -7,11 +10,13 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import io.realm.Realm;
 
 public class MainActivity extends AppCompatActivity {
     private static final String PREFS_NAME = "preferenceName";
+    static boolean isLoggedIn = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,15 +37,31 @@ public class MainActivity extends AppCompatActivity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.home:
-                getFragmentManager().beginTransaction().replace(R.id.container,new CourseFragment(),"course").commit();
+                if(isLoggedIn) {
+                    getFragmentManager().beginTransaction().replace(R.id.container, new CourseFragment(), "course").commit();
+                }
+                else{
+                    Toast.makeText(MainActivity.this,"Please Login to assess home page",Toast.LENGTH_SHORT).show();
+                }
                 return true;
             case R.id.instructors:
-                getFragmentManager().beginTransaction().replace(R.id.container,new InstructorFragment(),"instructor").commit();
+                if(isLoggedIn) {
+                    getFragmentManager().beginTransaction().replace(R.id.container, new InstructorFragment(), "instructor").commit();
+                }
+                else{
+                    Toast.makeText(MainActivity.this,"Please Login to assess instructor page",Toast.LENGTH_SHORT).show();
+                }
                 return true;
             case R.id.addInstructors:
-                getFragmentManager().beginTransaction().replace(R.id.container,new AddInstructorFragment(),"addinst").commit();
+                if(isLoggedIn) {
+                    getFragmentManager().beginTransaction().replace(R.id.container, new AddInstructorFragment(), "addinst").commit();
+                }
+                else{
+                    Toast.makeText(MainActivity.this,"Please Login to add instructor",Toast.LENGTH_SHORT).show();
+                }
                 return true;
             case R.id.logout:
+                isLoggedIn = false;
                 getFragmentManager().beginTransaction().replace(R.id.container,new LoginFragment(),"login").commit();
                 return true;
             case R.id.exit:

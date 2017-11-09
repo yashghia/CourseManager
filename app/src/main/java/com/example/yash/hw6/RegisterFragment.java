@@ -56,7 +56,8 @@ public class RegisterFragment extends Fragment {
                 lastName = (EditText) getView().findViewById(R.id.lname);
                 userName = (EditText) getView().findViewById(R.id.uname);
                 password = (EditText) getView().findViewById(R.id.pword);
-                if (!firstName.getText().toString().equals("") && !lastName.getText().toString().equals("") && !userName.getText().toString().equals("") && !password.getText().toString().equals("")) {
+                String passwordTest = password.getText().toString();
+                if (!firstName.getText().toString().equals("") && !lastName.getText().toString().equals("") && !userName.getText().toString().equals("") && !passwordTest.equals("") && passwordTest.length()>7 ) {
                     try {
                         //realm = Realm.getDefaultInstance();
                         //RealmConfiguration config = new RealmConfiguration.Builder().name("login.realm").build();
@@ -98,7 +99,7 @@ public class RegisterFragment extends Fragment {
 
                     }
                 }else{
-                    Toast.makeText(getActivity(), "Please enter all the details",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "Please enter all the details and password should be min 8 characters",Toast.LENGTH_LONG).show();
                 }
             }
         });

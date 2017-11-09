@@ -70,7 +70,8 @@
             android:layout_height="wrap_content"
             android:layout_alignStart="@+id/insEmail"
             android:layout_alignTop="@+id/id"
-            android:text="URL" />
+            android:text="URL"
+            android:clickable="true"/>
     </RelativeLayout>
 
 </FrameLayout>
